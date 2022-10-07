@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "django_tables2",
     "django_htmx",
-    "table",
+    "tables",
 ]
 
 MIDDLEWARE = [

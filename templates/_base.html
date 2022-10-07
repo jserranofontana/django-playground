@@ -1,0 +1,44 @@
+{# templates/_base.html #}
+{% load static django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Django HTMx playground{% endblock title %}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        {# Load CSS #}
+        {% bootstrap_css %}
+        <link rel="stylesheet" type='text/css' href="{% static 'tables/css/style.css' %}">
+
+        {# Load JS #}
+        {% bootstrap_javascript %}
+        <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+        <script src="https://unpkg.com/htmx.org@1.8.0"></script>
+        <script src="//unpkg.com/alpinejs" defer></script>
+
+        {% block header %}
+        {% endblock header %}
+
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <nav class="navbar navbar-dark bg-dark mb-5">
+                <div class="container">
+                    <a href="" class="navbar-brand">Django HTMx PlayGround</a>
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="Tables" href="{% url 'tables:products' %}">Tables</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="container">
+                {% block main %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

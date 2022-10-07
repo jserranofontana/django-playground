@@ -1,0 +1,36 @@
+{# templates/tables/_base.html #}
+{% extends "_base.html" %}
+
+{% load render_table from django_tables2 %}
+{% load i18n %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <div class="toc mt4 mb-5 text-muted">
+                <strong class="d-block h6 my-2 pb-2 border-bottom">Pages</strong>
+                <nav class="toc">
+                    <ul class="nav flex-column nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link {% block html_table %}{% endblock %}" href="{% url 'tables:products' %}">HTML table</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% block simple_htmx_table %}{% endblock %}" href="{% url 'tables:products_htmx' %}">Simple HTMx table</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% block multi_htmx_table %}{% endblock %}" href="{% url 'tables:products_htmx_multicol' %}">Multi Filter HTMx table</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% block htmx_table_infinite %}{% endblock %}" href="{% url 'tables:products_htmx_infinite' %}">HTMx infinite scroll</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col-10">
+            {% block table_main %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% load django_tables2 %}
+{% load i18n %}
+{% block table-wrapper %}
+    <div id="table-container" class="table-container">
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+
+        {% block pagination %}
+            {% if table.page and table.paginator.num_pages > 1 %}
+                <nav aria-label="Table navigation">
+                    <ul class="pagination justify-content-end">
+                        {% if table.page.has_previous %}
+                            {% block pagination.previous %}
+                            {% endblock pagination.previous %}
+                        {% endif %}
+                        {% if table.page.has_previous or table.page.has_next %}
+                            {% block pagination.range %}
+                            {% endblock pagination.range %}
+                        {% endif %}
+                        {% if table.page.has_next %}
+                            {% block pagination.next %}
+                            {% endblock pagination.next %}
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        {% endblock pagination %}
+        {% block table %}
+            <table id="table" {% render_attrs table.attrs class="table" %}>
+                {% block table.thead %}
+                    {% if table.show_header %}
+                        <thead {{ table.attrs.thead.as_html }}>
+                        <tr>
+                            {% for column in table.columns %}
+                                <th {{ column.attrs.th.as_html }} hx-get="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}" hx-trigger="click" hx-target="#table-container" hx-swap="outerHTML" role="button">
+{#                                    {% if column.orderable %}#}
+{#                                        <a href="{% querystring table.prefixed_order_by_field=column.order_by_alias.next %}">{{ column.header }}</a>#}
+{#                                    {% else %}#}
+                                        {{ column.header }}
+{#                                    {% endif %}#}
+                                </th>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                    {% endif %}
+                {% endblock table.thead %}
+                {% block table.tbody %}
+                    <tbody {{ table.attrs.tbody.as_html }}>
+                      {% include 'tables/components/bootstrap_htmx_rows.html' %}
+                    </tbody>
+                {% endblock table.tbody %}
+                {% block table.tfoot %}
+                    {% if table.has_footer %}
+                        <tfoot {{ table.attrs.tfoot.as_html }}>
+                        <tr>
+                            {% for column in table.columns %}
+                                <td {{ column.attrs.tf.as_html }}>{{ column.footer }}</td>
+                            {% endfor %}
+                        </tr>
+                        </tfoot>
+                    {% endif %}
+                {% endblock table.tfoot %}
+            </table>
+        {% endblock table %}
+
+    </div>
+{% endblock table-wrapper %}

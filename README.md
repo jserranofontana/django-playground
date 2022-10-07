@@ -5,8 +5,11 @@ Boilerplate based on info
 https://geoff.tuxpup.com/posts/django_tailwind_htmx_how_i_start/
 
 Write initial .env file
+
 echo DEBUG=True >>.env
+
 echo DJANGO_SECRET_KEY=$(poetry run python -c "import secrets; print(secrets.token_urlsafe())") >>.env
+
 DATABASE_URL=<your Postgres URL>
 
 Boilerplate.

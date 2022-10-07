@@ -1,29 +1,42 @@
-django-htmx
+# django-htmx
+
 Samples about htmx-alpine use in Django
 
-Boilerplate based on info
-https://geoff.tuxpup.com/posts/django_tailwind_htmx_how_i_start/
+**Preparing remote repository**
+`echo "# django-playground" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/jserranofontana/django-playground.git
+git push -u origin main`
 
-Write initial .env file
+**Store GitHub PAT on Manjaro Keyring**
+<https://noabody.wordpress.com/2020/12/22/git-manjaro-linux-personal-access-token-keyring/>
+`git config --global credential.helper /usr/lib/git-core/git-credential-libsecret
+cd myrepo
+git push`
 
-echo DEBUG=True >>.env
+**Boilerplate based on info**
+<https://geoff.tuxpup.com/posts/django_tailwind_htmx_how_i_start/>
 
+*Write initial .env file*
+`echo DEBUG=True >>.env
 echo DJANGO_SECRET_KEY=$(poetry run python -c "import secrets; print(secrets.token_urlsafe())") >>.env
+DATABASE_URL=<your Postgres URL>`
 
-DATABASE_URL=<your Postgres URL>
-
-Boilerplate.
+*Boilerplate.*
 - poetry virtualenv
 - Python-3.10
 - GitHub
 - Project level templates
 
-PreCommit 
+*PreCommit* 
 - black = "^22.10.0"
 - djhtml = "^1.5.2"
 - pre-commit = "^2.20.0"
 
-Dependencies
+*Dependencies*
 - python = "3.10.7"
 - Django = "^4.1.2"
 - django-htmx = "^1.12.2"

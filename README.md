@@ -1,6 +1,11 @@
 # django-htmx  
 Samples about htmx-alpine use in Django  
 
+**Tutorials**
+- Responsive HTMX Table (with sorting, filtering and pagination)
+`https://enzircle.com/responsive-table-with-django-and-htmx#cl57uqo780ho4ownv740lc6wb`
+>also with infinite scroll (see first comment)
+
 **Preparing remote repository**  
 `echo "# django-playground" >> README.md  
 git init  
@@ -52,4 +57,14 @@ DATABASE_URL=<your Postgres URL>`
 - psycopg2-binary = "^2.9.4"
 - dj-database-url = "^1.0.0"
 
+**Comandos**
+- Para crear un fichero con los datos iniciales (los que haya en ese momento en la BB.DD) de un modelo
+`python manage.py dumpdata demo.todo --indent 4 > fixtures/todo.json`
+- Para crear un fichero con los datos iniciales de 'todos' los modelos
+`python manage.py dumpdata DomcaProAccess --indent 4 > fixtures/DomcaProAccess.json`
+
+- Para cargar los datos iniciales a partir de un fichero
+`python manage.py loaddata fixtures/todo.json --app demo.todo`
+- Para cargar los datos iniciales de 'toda' la aplicación a partir de un fichero
+`python manage.py loaddata fixtures/DomcaProAccess --app DomcaProAccess`
 

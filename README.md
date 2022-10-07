@@ -4,6 +4,8 @@ Samples about htmx-alpine use in Django
 **Tutorials**
 - Responsive HTMX Table (with sorting, filtering and pagination)
 `https://enzircle.com/responsive-table-with-django-and-htmx#cl57uqo780ho4ownv740lc6wb`
+- Also with infinite scroll (see first comment)
+`https://htmx.org/examples/infinite-scroll/`
 
 **Preparing remote repository**  
 `echo "# django-playground" >> README.md  

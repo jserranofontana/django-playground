@@ -1,0 +1,42 @@
+{% extends "alpine/_base.html" %}
+
+{% block page_counter %}
+active
+{% endblock %}
+
+{% block table_main %}
+    <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+        <h4>Counter example</h4>
+        <div class="col-auto my-1">
+            <div class="input-group col-md-6" x-data="{ count: 0 }">
+                <input class="form-control" type="number" x-model="count">
+                <button class="btn btn-outline-danger" x-on:click="count--"><i class="fa-solid fa-circle-minus"></i></button>
+                <span class="mx-2 my-auto" x-text="count"></span>
+                <button class="btn btn-outline-primary" @click="count++"><i class="fa-solid fa-circle-plus"></i></button>
+                <button class="btn btn-outline-primary" @click="count *= count"><i class="fa-solid fa-asterisk"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+        <h4>List</h4>
+        <div x-data="{people: [], showImages: false}"
+             x-init="people = await (await fetch('people/')).json()"
+        >
+            <button class="btn btn-light" @click="showImages = !showImages">
+                <i x-show="!showImages" class="fa-solid fa-eye"></i>
+                <i x-show="showImages" class="fa-solid fa-eye-slash"></i>
+            </button>
+            <span x-text="showImages ? 'Hide Images' : 'Show Images'"></span>
+            <template x-for="person in people">
+                <div>
+                    <p x-text="person.name"
+                       :class="person.name.startsWith('M') ? 'text-danger' : 'text-success'"
+                    ></p>
+<!--                    <img x-bind:src="person.image"/>-->
+                    <img x-show="showImages" :src="person.image" x-transition.duration.100ms/>
+                </div>
+            </template>
+
+        </div>
+    </div>
+{% endblock %}

@@ -65,7 +65,9 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "django_tables2",
     "django_htmx",
+    "widget_tweaks",
     "tables",
+    "alpine",
 ]
 
 MIDDLEWARE = [

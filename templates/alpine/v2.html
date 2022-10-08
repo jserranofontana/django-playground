@@ -1,0 +1,49 @@
+{% extends "alpine/_base.html" %}
+{% load widget_tweaks %}
+
+{% block page_filter %}
+active
+{% endblock %}
+
+{% block table_main %}
+
+    <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+        <h4>Client side filter</h4>
+        <div x-data="{bands: [], genre:$refs.selectedGenre.value, genres: []}" x-init="bands = await (await fetch('bands/')).json(); console.log(bands)">
+            <div class="row">
+                <h4>Filters</h4>
+                <div class="col-md-6">
+                    {% render_field form.genre autocomplete="off" class="form-control form-select-sm" @change="genre = $el.value" x-ref="selectedGenre" %}
+                </div>
+                <div class="col-md-6">
+                    {% render_field form.genres autocomplete="off" class="" @change="genres = changedGenres($el, genres)"%}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <template x-for="band in bands.filter(b => b.genre == genre)">
+                        <p x-text="`${band.name} - ${band.genre}`"></p>
+                    </template>
+                </div>
+                <div class="col-md-6">
+                    <template x-for="band in bands.filter(b => genres.includes(b.genre))">
+                        <p x-text="`${band.name} - ${band.genre}`"></p>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changedGenres(el, genres) {
+            const genre = el.value;
+            if (genres.includes(genre)) {
+                return genres.filter(g => g != genre)
+            } else {
+                return[...genres, genre]
+            }
+        }
+
+    </script>
+
+{% endblock %}

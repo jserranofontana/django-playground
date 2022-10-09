@@ -24,6 +24,8 @@ dj-database-url = "^1.0.0"
 django-tables2 = "^2.4.1"
 django-filter = "^22.1"
 django-ninja = "^0.19.1"
+django-taggit = "^3.0.0"
+Markdown = "^3.4.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.10.0"

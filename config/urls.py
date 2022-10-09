@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import debug_toolbar
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -22,9 +23,10 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
-    path("accounts/", include("allauth.urls")),
+    # path("accounts/", include("allauth.urls")),
     path("", TemplateView.as_view(template_name="index.html")),
     path("table/", include(("tables.urls", "tables"), namespace="tables")),
     path("alpine/", include(("alpine.urls", "alpine"), namespace="alpine")),
     path("realworld/", include(("realworld.urls", "realworld"), namespace="realworld")),
+    path("__debug__/", include(debug_toolbar.urls)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

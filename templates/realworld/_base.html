@@ -12,7 +12,10 @@
                 <nav class="toc">
                     <ul class="nav flex-column nav-pills">
                         <li class="nav-item">
-                            <a class="nav-link {% block page_realworld %}{% endblock %}" href="{% url 'realworld:home' %}">Real World</a>
+                            <a class="nav-link {% block page_home %}{% endblock %}" href="{% url 'realworld:home' %}">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% block page_accounts %}{% endblock %}" href="{% url 'realworld:accounts' %}">Accounts</a>
                         </li>
 {% comment %}
                         <li class="nav-item">

@@ -26,6 +26,7 @@ django-filter = "^22.1"
 django-ninja = "^0.19.1"
 django-taggit = "^3.0.0"
 Markdown = "^3.4.1"
+django-debug-toolbar = "^3.7.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.10.0"

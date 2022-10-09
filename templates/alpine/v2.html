@@ -9,7 +9,7 @@ active
 
     <div class="row shadow-sm p-3 mb-5 bg-white rounded">
         <h4>Client side filter</h4>
-        <div x-data="{bands: [], genre:$refs.selectedGenre.value, genres: []}" x-init="bands = await (await fetch('bands/')).json(); console.log(bands)">
+        <div x-data="{bands: [], genre:$refs.selectedGenre.value, genres: []}" x-init="bands = await (await fetch('api/bands/')).json(); console.log(bands)">
             <div class="row">
                 <h4>Filters</h4>
                 <div class="col-md-6">

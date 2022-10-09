@@ -1,0 +1,22 @@
+{% extends "alpine/_base.html" %}
+{% load widget_tweaks %}
+
+{% block page_university %}
+active
+{% endblock %}
+
+{% block table_main %}
+
+    <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+        <h1>University of Glasgow</h1>
+        <p>
+            {% lorem %}
+        </p>
+        <button class="btn btn-primary"
+                hx-get="{% url 'alpine:course_list' %}"
+                hx-target="this"
+                hx-swap="outerHTML"
+        >View Courses</button>
+    </div>
+{% endblock %}
+

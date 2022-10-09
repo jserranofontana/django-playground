@@ -1,0 +1,19 @@
+{% extends "alpine/_base.html" %}
+{% load widget_tweaks %}
+
+{% block page_accordion %}
+active
+{% endblock %}
+
+{% block table_main %}
+
+    <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+        <h4>Chained Dropdown</h4>
+        {{ form.course.label_tag }}
+        {% render_field form.course class='custom-select mb-4' autocomplete="off" hx-get="modules/" hx-target="#id_modules" %}
+
+        {{ form.modules.label_tag }}
+        {% render_field form.modules class='custom-select mb-4' %}
+    </div>
+{% endblock %}
+

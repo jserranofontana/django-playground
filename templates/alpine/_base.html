@@ -19,6 +19,12 @@
                         <li class="nav-item">
                             <a class="nav-link {% block page_filter %}{% endblock %}" href="{% url 'alpine:filter' %}">Filter</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% block page_accordion %}{% endblock %}" href="{% url 'alpine:accordion' %}">Linked Dropdown</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% block page_university %}{% endblock %}" href="{% url 'alpine:university' %}">University</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

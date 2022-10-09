@@ -1,0 +1,38 @@
+<div id="course-accordion" x-data="{openedIndexes: []}">
+    {% for course in courses %}
+        <div class="card">
+            <div class="card-header"
+                 style="cursor: pointer;"
+                 @click="openedIndexes = toggleIndexes(openedIndexes, {{forloop.counter}})"
+            >
+                <h5 class="mb-0">
+                    <span x-html='openedIndexes.includes({{forloop.counter}}) ?
+                                    "<i class=\"fa-solid fa-square-caret-down\"></i>" :
+                                    "<i class=\"fa-solid fa-square-caret-right\"></i>" '></span>
+                    {{ course.name }}
+                </h5>
+            </div>
+            <div>
+                <div class="card-body" x-show="openedIndexes.includes({{forloop.counter}})">
+                    {% lorem %}
+                    <h3 class="mt-3">Modules</h3>
+                    <ul>
+                        {% for module in course.modules.all %}
+                            <li>{{ module.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    function toggleIndexes(openedIndexes, index) {
+        if (!openedIndexes.includes(index)) {
+            return [...openedIndexes, index];
+        } else {
+            return openedIndexes.filter(i => i != index);
+        }
+    }
+</script>

@@ -1,0 +1,37 @@
+{# templates/realworld/_base.html #}
+{% extends "_base.html" %}
+
+{% block realworld %}active{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <div class="toc mt4 mb-5 text-muted">
+                <strong class="d-block h6 my-2 pb-2 border-bottom">Pages</strong>
+                <nav class="toc">
+                    <ul class="nav flex-column nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link {% block page_realworld %}{% endblock %}" href="{% url 'realworld:home' %}">Real World</a>
+                        </li>
+{% comment %}
+                        <li class="nav-item">
+                            <a class="nav-link {% block page_filter %}{% endblock %}" href="{% url 'alpine:filter' %}">Filter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% block page_accordion %}{% endblock %}" href="{% url 'alpine:accordion' %}">Linked Dropdown</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% block page_university %}{% endblock %}" href="{% url 'alpine:university' %}">University</a>
+                        </li>
+{% endcomment %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col-10">
+            {% block table_main %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

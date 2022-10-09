@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "tables",
     "alpine",
+    "realworld",
 ]
 
 MIDDLEWARE = [

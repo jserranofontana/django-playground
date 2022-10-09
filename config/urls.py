@@ -26,4 +26,5 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="index.html")),
     path("table/", include(("tables.urls", "tables"), namespace="tables")),
     path("alpine/", include(("alpine.urls", "alpine"), namespace="alpine")),
+    path("realworld/", include(("realworld.urls", "realworld"), namespace="realworld")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

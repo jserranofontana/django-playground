@@ -23,6 +23,7 @@
 
     </head>
 
+    {% block body %}
     <body>
 
         <div id="wrapper">
@@ -40,7 +41,7 @@
                                 <a class="nav-link {% block alpine %}{% endblock %}" aria-current="Alpine" href="{% url 'alpine:home' %}">Alpine</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {% block realworld %}{% endblock %}" aria-current="RealWorld" href="{% url 'realworld:home' %}">Conduit</a>
+                                <a class="nav-link {% block realworld %}{% endblock %}" aria-current="RealWorld" href="{% url 'realworld:articleshome' %}">Conduit</a>
                             </li>
                         </ul>
                 </nav>
@@ -48,4 +49,6 @@
             </div>
         </div>
     </body>
+    {% endblock body %}
+
 </html>

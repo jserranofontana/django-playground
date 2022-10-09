@@ -1,40 +1,82 @@
-{# templates/realworld/_base.html #}
-{% extends "_base.html" %}
+{% spaceless %}
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <meta name="htmx-config" content='{"historyCacheSize": 0, "refreshOnHistoryMiss": false}'>
 
-{% block realworld %}active{% endblock %}
+            <title>Conduit</title>
+            <!-- Import Ionicon icons & Google Fonts our Bootstrap theme relies on -->
+            <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+            <link href="//fonts.googleapis.com/css?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic"
+                rel="stylesheet" type="text/css">
+            <!-- Import the custom Bootstrap 4 theme from our hosted CDN -->
+            <link rel="stylesheet" href="//demo.productionready.io/main.css">
 
-{% block main %}
-<div class="container">
-    <div class="row">
-        <div class="col-2">
-            <div class="toc mt4 mb-5 text-muted">
-                <strong class="d-block h6 my-2 pb-2 border-bottom">Pages</strong>
-                <nav class="toc">
-                    <ul class="nav flex-column nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link {% block page_home %}{% endblock %}" href="{% url 'realworld:home' %}">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% block page_accounts %}{% endblock %}" href="{% url 'realworld:accounts' %}">Accounts</a>
-                        </li>
-{% comment %}
-                        <li class="nav-item">
-                            <a class="nav-link {% block page_filter %}{% endblock %}" href="{% url 'alpine:filter' %}">Filter</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% block page_accordion %}{% endblock %}" href="{% url 'alpine:accordion' %}">Linked Dropdown</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% block page_university %}{% endblock %}" href="{% url 'alpine:university' %}">University</a>
-                        </li>
-{% endcomment %}
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <div class="col-10">
-            {% block table_main %}{% endblock %}
-        </div>
-    </div>
-</div>
-{% endblock %}
+            <script src="https://unpkg.com/htmx.org@1.6.1"
+                integrity="sha384-tvG/2mnCFmGQzYC1Oh3qxQ7CkQ9kMzYjWZSNtrRZygHPDDqottzEJsqS4oUVodhW"
+                crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/alpinejs@3.7.1/dist/cdn.min.js"
+                defer
+                integrity="sha384-KLv/Yaw8nAj6OXX6AvVFEt1FNRHrfBHziZ2JzPhgO9OilYrn6JLfCR4dZzaaQCA5"
+                crossorigin="anonymous"></script>
+
+        </head>
+<!--        <body hx-boost="true">-->
+        <body>
+            <nav class="navbar navbar-light">
+                <div class="container">
+
+                    <a class="navbar-brand" href="{% url 'realworld:articleshome' %}">conduit</a>
+
+                    {% with url_name=request.resolver_match.url_name %}
+                        <ul class="nav navbar-nav pull-xs-right">
+                            <li class="nav-item">
+                                <a class="nav-link{% if url_name == 'articleshome' %} active{% endif %}" href="{% url 'realworld:articleshome' %}">Home</a>
+                            </li>
+                            <li class="nav-item{% if url_name == 'create_article' %} active{% endif %}">
+                                <a class="nav-link" href="{% url 'realworld:create_article' %}">
+                                    <i class="ion-compose"></i>&nbsp;New Article
+                                </a>
+                            </li>
+                            {% if user.is_authenticated %}
+                                <li class="nav-item{% if url_name == 'settings' %} active{% endif %}">
+                                    <a class="nav-link" href="{% url 'realworld:settings' %}">
+                                        <i class="ion-gear-a"></i>&nbsp;Settings
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        href="javascript:void(0)"
+                                        hx-post="{% url 'realworld:logout'%}"
+                                        hx-target="body"
+                                        hx-push-url="true"
+                                        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                                        Sign Out
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item{% if url_name == 'login' %} active{% endif %}">
+                                    <a class="nav-link" href="{% url 'realworld:login' %}">Sign in</a>
+                                </li>
+                                <li class="nav-item{% if url_name == 'register' %} active{% endif %}">
+                                    <a class="nav-link" href="{% url 'realworld:register' %}">Sign up</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endwith %}
+                </div>
+            </nav>
+            {% block content %}{% endblock %}
+            <footer>
+                <div class="container">
+                    <a href="{% url 'playground' %}" class="logo-font">conduit</a>
+                    <span class="attribution">
+                        An interactive learning project from <a href="https://thinkster.io">Thinkster</a>. Code &amp; design licensed under MIT.
+                    </span>
+                </div>
+            </footer>
+        </body>
+    </html>
+{% endspaceless %}

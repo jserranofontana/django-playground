@@ -42,7 +42,7 @@ class User(AbstractUser):
     objects = UserManager()
 
     def get_absolute_url(self) -> str:
-        return reverse("profile", args=[self.id])
+        return reverse("realworld:profile", args=[self.id])
 
     def get_full_name(self) -> str:
         return self.name

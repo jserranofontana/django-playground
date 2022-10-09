@@ -66,12 +66,14 @@ INSTALLED_APPS = [
     "django_tables2",
     "django_htmx",
     "widget_tweaks",
-    "debug_toolbar",
+    # "debug_toolbar",
     "taggit",
     "tables",
     "alpine",
     "realworld",
     "realworld.accounts",
+    "realworld.articles",
+    "realworld.comments",
 ]
 
 MIDDLEWARE = [
@@ -80,7 +82,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    #    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
@@ -193,8 +195,8 @@ MESSAGE_TAGS = {
 
 AUTH_USER_MODEL = "accounts.User"
 
-LOGIN_URL = "/login/"
-LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "/realworld/login/"
+LOGIN_REDIRECT_URL = "/realworld"
 
 INTERNAL_IPS = [
     "127.0.0.1",

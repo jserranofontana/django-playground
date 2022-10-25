@@ -14,4 +14,6 @@ urlpatterns = [
     path("accordion/modules/", views.modules, name="modules"),
     path("accordion/university/", views.university, name="university"),
     path("accordion/university/course-list", views.course_list, name="course_list"),
+    path("tabs/", views.tabs, name="tabs"),
+    path("complaint/", views.complaint, name="complaint"),
 ]

@@ -28,5 +28,7 @@ urlpatterns = [
     path("table/", include(("tables.urls", "tables"), namespace="tables")),
     path("alpine/", include(("alpine.urls", "alpine"), namespace="alpine")),
     path("realworld/", include(("realworld.urls", "realworld"), namespace="realworld")),
+    path("celery/", include(("celeryApp.urls", "celery"), namespace="celery")),
+    path("htmx/", include(("htmx.urls", "htmx"), namespace="htmx")),
     path("__debug__/", include(debug_toolbar.urls)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

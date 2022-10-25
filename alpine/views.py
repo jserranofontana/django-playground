@@ -1,5 +1,7 @@
 from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import render
+from .forms import ComplaintForm
+from .models import Complaint
 
 from .models import Band, Course, Module
 from .forms import classGenreChoiceForm, UniversityForm
@@ -52,3 +54,13 @@ def course_list(request):
     courses = Course.objects.prefetch_related("modules").all()
     context = {"courses": courses}
     return render(request, "alpine/partials/_course-list.html", context)
+
+
+def tabs(request):
+    return render(request, "alpine/v4.html", {})
+
+
+def complaint(request):
+    form = ComplaintForm()
+    context = {"form": form}
+    return render(request, "alpine/v5.html", context)

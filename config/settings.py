@@ -21,7 +21,8 @@ load_dotenv()
 
 env = environ.FileAwareEnv(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    CELERY_BROKER_REDIS_URL=(str, "redis://localhost:6379"),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -68,12 +69,15 @@ INSTALLED_APPS = [
     "widget_tweaks",
     # "debug_toolbar",
     "taggit",
+    "django_celery_beat",
+    "django_celery_results",
     "tables",
     "alpine",
     "realworld",
     "realworld.accounts",
     "realworld.articles",
     "realworld.comments",
+    "celeryApp",
 ]
 
 MIDDLEWARE = [
@@ -201,3 +205,15 @@ LOGIN_REDIRECT_URL = "/realworld"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# save Celery task results in Django's database
+CELERY_RESULT_BACKEND = "django-db"
+
+# This configures Redis as the datastore between Django + Celery
+CELERY_BROKER_URL = env("CELERY_BROKER_REDIS_URL")
+
+# if you out to use os.environ the config is:
+# CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_REDIS_URL', 'redis://localhost:6379')
+
+# this allows you to schedule items in the Django admin.
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers.DatabaseScheduler"

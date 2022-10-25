@@ -20,3 +20,9 @@ class Module(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Complaint(models.Model):
+    text = models.TextField()
+    email = models.EmailField()
+    created = models.DateTimeField(auto_now_add=True)

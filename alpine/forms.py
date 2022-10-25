@@ -1,6 +1,6 @@
 from django import forms
 from dynamic_forms import DynamicField, DynamicFormMixin
-from .models import Band, Course, Module
+from .models import Band, Course, Module, Complaint
 
 
 class classGenreChoiceForm(forms.Form):
@@ -32,3 +32,12 @@ class UniversityForm(DynamicFormMixin, forms.Form):
     modules = DynamicField(
         forms.ModelChoiceField, queryset=module_choices, initial=initial_module
     )
+
+
+class ComplaintForm(forms.ModelForm):
+    class Meta:
+        model = Complaint
+        fields = ("text", "email")
+        lables = {
+            "text": "Complaint",
+        }

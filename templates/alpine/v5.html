@@ -1,0 +1,54 @@
+{% extends "alpine/_base.html" %}
+{% load widget_tweaks %}
+
+{% block page_complaint %}
+active
+{% endblock %}
+
+{% block table_main %}
+    <div x-data="{showModal: false, mensaje:'hola'}">
+        <!-- Button trigger modal -->
+        <button @click="showModal=true" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Launch demo modal
+        </button>
+        <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+            <h4>Complaints Page </h4>
+        </div>
+        <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+            <!-- Modal -->
+            <div x-show="showModal" >
+                <span x-text="mensaje"></span>
+            </div>
+{% comment %}
+            x-show="showModal" x-on:click.away="showModal=false"
+{% endcomment %}
+            <div x-cloak x-transition :class="!showModal ? 'modal fade': ''" role="dialog" id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true"  class="shadow-sm rounded" >
+              <div @click.outside="data='yeeepa'" class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Submit complaint</h5>
+                    <button @click="showModal=false" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body m-b-2">
+                      <form action="#">
+                        <div>
+                            {% render_field form.text|add_label_class:"p-2" %}
+                            {% render_field form.text class="form-control mb-2" %}
+                        </div>
+                        <div>
+                            {% render_field form.email|add_label_class:"p-2" %}
+                            {% render_field form.email class="form-control  mb-2" %}
+                        </div>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

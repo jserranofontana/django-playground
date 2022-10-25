@@ -1,0 +1,30 @@
+{% extends "alpine/_base.html" %}
+
+{% block page_tabs %}
+active
+{% endblock %}
+
+{% block table_main %}
+    <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+        <h4>Tabs example</h4>
+    </div>
+    <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+        <div x-data="{currentTab: 'Home'}">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                {% with "Home Profile Contact" as tablist %}
+                {% include "alpine/partials/_tabs.html" with tabs=tablist.split %}
+                {% endwith %}
+            </ul>
+            <span x-text="currentTab"></span>
+            <div class="tab-content" id="myTabContent">
+              <div x-show="currentTab == 'Home'" class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab"
+              :class="currentTab.toLowerCase() == $el.id ? 'active show' : ''">Tab1 Content</div>
+              <div x-show="currentTab == 'Profile'" class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"
+              :class="currentTab.toLowerCase() == $el.id ? 'active show' : ''">
+                  {% lorem %}}</div>
+              <div x-show="currentTab == 'Contact'" class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"
+              :class="currentTab.toLowerCase() == $el.id ? 'active show' : ''">Tab3  Content</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

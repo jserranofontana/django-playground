@@ -1,0 +1,7 @@
+{% for tab in tabs %}
+    <li class="nav-item">
+        <a class="nav-link" id=""{{tab}}-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"
+        @click="currentTab='{{tab}}'"
+        :class="currentTab == '{{tab}}' ? 'active' : ''">{{tab}}</a>
+    </li>
+{% endfor %}
